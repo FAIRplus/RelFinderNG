@@ -1,0 +1,34 @@
+version: '3.3'
+
+services:
+    allegrograph:
+      image: franzinc/agraph:latest
+      container_name: ag
+      shm_size: 1g
+      ports:
+        - '10000-10035:10000-10035'
+      restart: unless-stopped
+      volumes:
+        - /Users/dangji3/workspace/ag/data:/agraph/data
+        - /Users/dangji3/workspace/ag/config:/agraph/etc
+      environment:
+        - AGRAPH_SUPER_USER=admin
+        - AGRAPH_SUPER_PASSWORD=pass
+      expose:
+        - 10035
+
+    relfinder:
+      image: novartis/relfinderng:2.0
+      container_name: relfinderng
+      ports:
+        - '4200:5000'
+      expose:
+        - 4200
+
+    relfinderproxy:
+      image: novartis/relfinderproxy:2.0
+      container_name: relfinderproxy
+      ports:
+        - '8080:8080'
+      expose:
+        - 8080

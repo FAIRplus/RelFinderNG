@@ -1,0 +1,41 @@
+{
+    "endpointURI": "https://dbpedia.interactivesystems.info",
+    "nodeResource": "http://dbpedia.org/resource/",
+    "classFilterLabels": [
+       "http://schema.org/Place",
+       "db:Country",
+       "db:Cricketer",
+       "foaf:Person",
+       "db:City",
+       "http://www.w3.org/2004/02/skos/core#Concept"
+    ],
+    "name": "DBpedia (mirror)",
+    "id": "dbp",
+    "description": "Linked Data version of Wikipedia.",
+    "defaultGraphURI": "http://dbpedia.org",
+    "autocompleteURIs": [
+       "http://www.w3.org/2000/01/rdf-schema#label"
+    ],
+    "ignoredProperties": [
+       "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+       "http://www.w3.org/2004/02/skos/core#subject",
+       "http://dbpedia.org/property/wikiPageUsesTemplate",
+       "http://dbpedia.org/property/wordnet_type",
+       "http://dbpedia.org/property/wikilink",
+       "http://dbpedia.org/ontology/wikiPageWikiLink",
+       "http://www.w3.org/2002/07/owl#sameAs",
+       "http://purl.org/dc/terms/subject"
+    ],
+    "abstractURIs": [
+       "http://dbpedia.org/ontology/abstract"
+    ],
+    "imageURIs": [
+       "http://dbpedia.org/ontology/thumbnail",
+       "http://xmlns.com/foaf/0.1/depiction"
+    ],
+    "linkURIs": [
+        "http://purl.org/ontology/mo/wikipedia",
+        "http://xmlns.com/foaf/0.1/homepage",
+        "http://xmlns.com/foaf/0.1/page"
+    ]
+}

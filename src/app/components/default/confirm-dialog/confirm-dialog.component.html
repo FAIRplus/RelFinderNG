@@ -1,0 +1,11 @@
+<img class="img-responsive deleteIcon" [src]="image">
+<div>
+  <span class="title-text" id="confirmTitle">{{title}}</span>
+</div>
+<div class="message-text">
+  <p>{{message}}</p>
+</div>
+<div mat-dialog-actions class="button-area">
+  <button mat-button (click)="onDismiss()" class="cancel-btn">Cancel</button>
+  <button mat-raised-button (click)="onConfirm()" class="delete-btn">Yes, Delete</button>
+</div>

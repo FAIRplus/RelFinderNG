@@ -1,0 +1,58 @@
+<div class="panel-group">
+    <form class="form-container" [formGroup]="searchForm" (ngSubmit)='onSubmit()' #f="ngForm">
+        <div class="panel panel-default borderless-panel">
+            <div class="panel-heading">
+                <div class="reset-icon-text">
+                    <img class="img-responsive reset-btn" src="assets/icons/reset.svg" alt="" (click)="reset()" [ngClass]="!f.valid ? 'disable-reset' : '' ">
+                    <p class="reset-text">RESET</p>
+                </div>
+                <p class="search-for">Search For</p>
+                <p class="popup-title">Relationship Between</p>
+            </div>
+            <div class="panel-body" slimScroll [options]="opts">
+                <div class="searchFlexBox">
+                    <div formArrayName="items" *ngFor="let item of items.controls; let i = index;">
+                        <div class="inputFlexBox" [formGroupName]="i">
+                            <div class="errorFlex">
+                                <input matInput id="txt_{{i}}" type="text" class="form-control input-field someinput" [ngClass]="{'error-input': (item.get('searchKeyword').value.length > 0 && item.touched && item.invalid) == true}" id="{{i}}" matInput formControlName="searchKeyword"
+                                    [matAutocomplete]="auto" placeholder="Relations between what?" (focus)="focusFunc($event,i)" (blur)="onFocusout(i)" (input)="onChage()">
+                                <span *ngIf="(item.get('searchKeyword').value.length > 0 && item.touched && item.invalid) == true" class="erorr-msg">
+                                    Select from suggested options
+                                </span>
+                            </div>
+                            <div *ngIf="items.length > 2 ? true : false">
+                                <img class="remove-field-img" (click)="removeItem(i);" src="assets/icons/remove_field.svg" alt="">
+                            </div>
+                        </div>
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="autoCompleteService.displayPropName" autoActiveFirstOption>
+                            <div *ngIf="autoCompleteService.isLoading && autoCompleteService.currentIndex === i">
+                                <mat-option *ngFor="let i of dummyOptions; let idx=index">
+                                    <label class="placeholder" [ngClass]="idx%2==0 ? 'gradient-big' : 'gradient-small' "></label>
+                                </mat-option>
+                            </div>
+                            <ng-container *ngIf="!autoCompleteService.isLoading && autoCompleteService.currentIndex === i">
+                                <mat-option id="matops" class="control-label" matTooltipClass="material-tooltipSearch" matTooltip="{{option.sub ? option.sub.value: ''}}" matTooltipPosition="right" *ngFor="let option of autoCompleteService.searchResult" [value]="option">
+                                    {{option.middle.value}}
+                                </mat-option>
+                            </ng-container>
+                        </mat-autocomplete>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="form-group row" *ngIf="invalidCntls > 7">
+                    <div class="col-md-12">
+                        <div class="btn-group special">
+                            <button class="btn btn-danger error-summary">{{invalidCntls}} more errors exist!</button>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary add-field-btn" (click)="addItem()">Add Field</button>
+                <button [disabled]="!f.valid" id="searchBtn" class="btn btn-secondary submit-btn" type="submit">
+                    <span *ngIf="!f.valid" class="disable-text">Search</span>
+                    <span *ngIf="f.valid" class="enable-text">Search</span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

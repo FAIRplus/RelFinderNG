@@ -1,0 +1,15 @@
+.backdrop {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    /* set same size as main class margin-left property value which is defined in style.css */
+    left: 55px;
+    right: 0;
+    z-index: 1000;
+    pointer-events: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-transition: opacity .4s cubic-bezier(.25, .8, .25, 1);
+    transition: opacity .4s cubic-bezier(.25, .8, .25, 1);
+    opacity: 0.55;
+    background: #434343;
+}

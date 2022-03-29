@@ -1,0 +1,47 @@
+<div class="panel container-fluid panel-bottom">
+    <div class="panel-heading row">
+        <div class="col-xs-auto">
+            <div class="header-details pull-left">
+                <div *ngIf="autoCompleteFormData.length === 0; else available;">
+                    <div>
+                        <label class="results-for linear-background slim"></label>
+                    </div>
+                    <div>
+                        <label class="results-for linear-background"></label><label class="results-for linear-background"></label><label class="results-for linear-background"></label>
+                    </div>
+                </div>
+                <ng-template #available>
+                    <div class="results-for">Results for</div>
+                    <div class="results-section">
+                        <div class="results-area">
+                            <span class="results-texts" matTooltipClass="material-tooltip" id="headerTxt" [matTooltip]="searchVal" matTooltipPosition="below" *ngFor="let result of searchInputs; let i=index;">
+                                <b><span>{{ result }}</span></b>
+                            <span class="results-vs" *ngIf="(i+1) < searchInputs.length">&nbsp;Vs</span>
+                            </span>
+                        </div>
+                        <p *ngIf="searchVal.length > screenWidth" class="more-text" [matTooltip]="searchVal" matTooltipClass="material-tooltip" matTooltipPosition="below">&nbsp;&nbsp;more</p>
+                    </div>
+                </ng-template>
+            </div>
+        </div>
+        <div *ngIf="autoCompleteFormData.length === 0" class="btn-frames-container col-xs-auto pull-right">
+            <label class="results-for linear-background btn-frames"></label><label class="results-for linear-background btn-frames"></label>
+        </div>
+        <div class="col-xs-auto">
+            <div *ngIf="visStatus == this.constantService.FINISHED || visStatus == this.constantService.LOADED || visStatus == this.constantService.LOADING" class="button-area">
+                <div class="btn-group">
+                    <button *ngIf="visStatus == this.constantService.FINISHED" type="button" (click)="onDismiss()" class="btn btn-secondary clear-data-btn">
+                    Clear Data<img class="closeIcon"
+                            src="assets/icons/clear_data.svg">
+                    </button>
+                    <button *ngIf="visStatus == this.constantService.FINISHED" class="btn btn-secondary load-complete-btn" id="VisualizationFinished"> <!-- Don't change this ID (VisualizationFinished) if change then change in filter-process.service.ts as well. -->
+                    Loading Completed<img class="closeIcon" src="assets/icons/done_load.svg">
+                    </button>
+                    <button *ngIf="visStatus == this.constantService.LOADING || visStatus == this.constantService.LOADED" class="btn btn-secondary top-loader">
+                    Loading Graph<img class="top-loader-gif" src="assets/icons/top_load_dots.gif">
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

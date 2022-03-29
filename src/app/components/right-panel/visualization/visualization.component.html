@@ -1,0 +1,49 @@
+<div class="app-left-panel" id="collapseMenu" [collapse]="isCollapsedLeft"></div>
+<div class="navbar-inverse " id="collapseMenu" [collapse]="!isCollapsedLeft"></div>
+<div class="app-header" id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true"></div>
+<div class="app-top-panel"></div>
+<div class="panel graph-panel container-fluid">
+    <div *ngIf="errorInfo == 'YES'" class="no-results-container">
+        <div *ngIf="errorInformation != ''">
+            <img src="assets/icons/no_results.svg" alt="" class="front-loader-gif">
+            <div class="loader-text">
+                Oops, Sorry!
+            </div>
+            <div class="loader-text-grey">
+                No Commonalities Identified! why not try a different entitiy?
+            </div>
+        </div>
+    </div>
+    <div *ngIf="visStatus == this.constantService.LOADING" class="front-loader-container">
+        <div>
+            <img class="front-loader-gif" src="assets/icons/front_loading.gif">
+        </div>
+        <div class="loader-text">
+            Please Wait ...!!!
+        </div>
+        <div class="loader-text-grey">
+            We are looking out for Commonalities
+        </div>
+    </div>
+    <div *ngIf="visStatus == this.constantService.IDLE" class="text-center" id="loadingIcon">
+        <!-- style="height: 100px;" -->
+        <!-- <div style="padding-top:15%;"> -->
+        <!-- <span>    -->
+        <div class="linear-background circle-frame"></div>
+        <!-- <p></p>          -->
+        <div>
+            <p class="linear-background thick-frame"></p>
+        </div>
+        <div>
+            <p class="linear-background thin-frame"></p>
+        </div>
+        <!-- </span> -->
+        <!-- </div> -->
+    </div>
+    <div class="graph-area" id="graph-area-vis" [ngStyle]="{'visibility':visStatus == this.constantService.LOADED || visStatus == this.constantService.FINISHED ? 'visible' : 'hidden'}">
+        <div [style.height.px]="intialHeight" [style.width.px]="intialWidth" id="loadGraph"></div>
+        <img class="vis-mouse" src="assets/icons/mouse.svg">
+        <button class="vis-fullscreen" type="button" (click)="isCollapsedVisulized()" [attr.aria-expanded]="isCollapsed" aria-controls="collapseBasic" matTooltip="Full Screen" matTooltipPosition="left" matTooltipClass="material-tooltipGraph">
+        </button>
+    </div>
+</div>

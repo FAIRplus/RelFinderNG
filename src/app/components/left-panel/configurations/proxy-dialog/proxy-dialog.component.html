@@ -1,0 +1,28 @@
+<div class="text-header">
+    <div class="headerContainer">
+        <span id="main-heading">Configure Proxy URL </span>
+    </div>
+    <div class="closeContainer">
+        <div>
+            <button type="button" class="btn btn-link copy-btn" [disabled]="!form.valid" (click)="saveProxyURL()"> Save
+            </button>
+        </div>
+        <div>
+            <button id="shareUrlBtn" type="button" class="btn btn-link closeBtn" (click)="closeDialog()">
+                <img id="closeShareURL" class="closeImg" src="assets/icons/remove_field.svg" alt=""></button>
+        </div>
+    </div>
+</div>
+<form [formGroup]="form">
+    <mat-dialog-content class="flexContainer">
+        <div class="urlText">
+            <span class="sub-heading">Proxy Server URL</span>
+        </div>
+        <div class="flexBody">
+            <input formControlName="url" id="url" type="text" class="url-text">
+            <div *ngIf="f.url.touched && f.url.invalid" class="error-info">
+                <div *ngIf="f.url.errors.pattern">Please enter valid URL</div>
+            </div>
+        </div>
+    </mat-dialog-content>
+</form>

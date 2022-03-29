@@ -1,0 +1,27 @@
+<h1 mat-dialog-title id="title">
+    {{title}}
+</h1>
+
+<div mat-dialog-actions>
+  <div class="row">
+      <div class="col-xs-12">
+        <form [formGroup]="addForm" (ngSubmit)="onSubmit()">
+            <div class="form-row">
+                <div class="form-group col-xs-8">
+                    <label>URI</label>
+                    <input type="text" formControlName="uri" class="form-control" [ngClass]="{ 'input-error-border': submitted && f.uri.errors }" />
+                    <div *ngIf="submitted && f.uri.errors" class="invalid-feedback">
+                        <div *ngIf="f.uri.errors.required" class="text-danger">Please enter URI</div>
+                        <div *ngIf="f.uri.errors.pattern" class="text-danger">Invalid URI.</div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <button type="reset" id="reset" class="btn btn-warning" (click)="onDismiss()">Cancel</button>
+                    <button type="submit" id="submit" class="btn btn-success">Ok</button>
+                </div>                
+            </div>
+        </form>
+      </div>
+  </div>
+  
+</div>

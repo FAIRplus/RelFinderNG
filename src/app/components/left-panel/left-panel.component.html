@@ -1,0 +1,77 @@
+<div class="navbar navbar-inverse navbar-fixed-left">
+    <div class="navbar-brand"><img class="company-logo" src="assets/icons/icons_novartis_logo.svg" alt=""></div>
+
+    <div class="container-fluid menu-group">
+        <ul class="nav navbar-nav">
+            <li id="searchMenu" (click)="updateToggleValue('search', !menu.get('search'))">
+                <a container="body" [outsideClick]="false" [popover]="searchPopupTemplate" placement="right" #searchPopup="bs-popover" [isOpen]="menu.get('search')" [ngClass]="{'tab-active': menu.get('search') == true}" [matTooltip]="menu.get('search') ? '' : 'Search Commonalities Between Entities'"
+                    matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                    <img class="menu-icon" src="assets/icons/search.svg" alt="">
+                    <span>SEARCH</span>
+                </a>
+            </li>
+
+            <li id="settings_config" (click)="updateToggleValue('config', !menu.get('config'))">
+                <a container="body" [outsideClick]="false" [popover]="settingPopupTemplate" placement="right" #settingPopupTemplate="bs-popover" [isOpen]="menu.get('config')" [ngClass]="{'tab-active': menu.get('config') == true}" [matTooltip]="menu.get('config') ? '' : dbName"
+                    matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                    <img class="menu-icon" src="assets/icons/settings.svg" alt="">
+                    <span>CONFIG</span>
+                </a>
+            </li>
+            <li id="infoMenu" (click)="updateToggleValue('info', !menu.get('info'))" [ngClass]="{'menu-disabled': disableInfo == true}">
+                <a container="body" [outsideClick]="false" [popover]="infoPopupTemplate" #infoPopupTemplate="bs-popover" placement="right" [isOpen]="menu.get('info')" [ngClass]="{'tab-active': menu.get('info') == true}" [matTooltip]="menu.get('info') ? '' : 'More Information'"
+                    matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                    <img class="menu-icon" src="assets/icons/info.svg" alt="">
+                    <span>&nbsp; INFO</span>
+                </a>
+            </li>
+            <li id="filterMenu" (click)="updateToggleValue('filter', !menu.get('filter'))" [ngClass]="{'menu-disabled': autoCompleteFormData.length === 0}">
+                <a container="body" [outsideClick]="false" [popover]="filterPopupTemplate" placement="right" [isOpen]="menu.get('filter')" [ngClass]="{'tab-active': menu.get('filter') == true}" [matTooltip]="menu.get('filter') ? '' : 'Show Results by Filter'" matTooltipClass="material-tooltipMenu"
+                    matTooltipPosition="right">
+                    <img class="menu-icon" src="assets/icons/filter.svg" alt="">
+                    <span>FILTER</span>
+                </a>
+            </li>
+            <li id="urlMenu" (click)="updateToggleValue('link', !menu.get('link'))" [ngClass]="{'menu-disabled': autoCompleteFormData.length === 0}">
+                <a (click)="onUrlClick()" [ngClass]="{'tab-active': menu.get('link') == true}" [matTooltip]="menu.get('link') ? '' : 'Share URL for Others'" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                    <img class="menu-icon" src="assets/icons/url.svg" alt="">
+                    <span> URL</span>
+                </a>
+            </li>
+            <li id="releaseMenu" (click)="updateToggleValue('release', !menu.get('release'))">
+                <a (click)="onReleaseInfoClick()" [ngClass]="{'tab-active': menu.get('release') == true}" [matTooltip]="menu.get('release') ? '' : 'Find Your Updates'" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                    <img class="menu-icon updateMenuIcon" src="assets/icons/bellBadge.svg" alt="">
+                    <div class="menuLine2"> NEW UPDATES</div>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img src="" alt="">
+                    <span>&nbsp;</span>
+                </a>
+            </li>
+            <li>
+                <a href="">
+                    <img src="" alt="">
+                    <span>&nbsp;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<ng-template #searchPopupTemplate>
+    <app-search></app-search>
+</ng-template>
+
+<ng-template #infoPopupTemplate>
+    <app-info></app-info>
+</ng-template>
+
+<ng-template #settingPopupTemplate>
+    <app-configurations></app-configurations>
+</ng-template>
+
+<ng-template #filterPopupTemplate>
+    <app-filter></app-filter>
+</ng-template>

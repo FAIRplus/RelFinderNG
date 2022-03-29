@@ -1,0 +1,68 @@
+<div class="panel-group">
+    <div class="panel panel-default borderless-panel">
+        <div class="panel-heading">
+            <h5 class="headings">Filter Graph Data
+                <span class="pull-right relations-text">Relations: ({{ totalActiveCounts }})</span>
+            </h5>
+        </div>
+        <div class="panel-body" *ngIf="allFilters">
+            <tabset type="tabs">
+                <ng-container *ngFor="let filters of allFilters | keyvalue : asIsOrder; let idx=index;">
+                    <tab id="tab_{{idx}}" heading="{{filters.key}}" id="{{filters.key}}" [active]="filters.value.active"
+                        (selectTab)="filters.value.active" (deselect)="!filters.value.active">
+                        <ng-template tabHeading>
+                            <span>
+                                <button class="btn btn-outline"
+                                    (click)="handleFilterHeaderClick(filters.value.isAllVisible,filters.key)"> <img
+                                        [src]="filters.value.isAllVisible | filterIconSelection: filters.key: filters.key: totalActiveCounts: 'parent'"
+                                        alt=""></button>
+                            </span>
+                        </ng-template>
+                        <div class="container-fluid">
+                            <div class="table-responsive">
+                                <table class="fixed_header">
+                                    <thead>
+                                        <tr>
+                                            <th>{{filters.key | filterHeading}}</th>
+                                            <th>Numbers</th>
+                                            <th>Show/hide</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody slimScroll [options]="opts">
+                                            <tr
+                                                *ngFor="let filterData of filters.value.filterData | keyvalue: asIsOrder; let i= index;">
+                                                <td [id]="i+'_'+filterData.key"
+                                                    (click)="filterProcessService.highlightNodesEdges(filterData.key, filters.key)"
+                                                    [ngClass]="{'active': (filterProcessService.activeFilterLabel === filterData.key && filterProcessService.activeFilter === filters.key)}">
+                                                    {{filterData.key}}
+                                                </td>
+                                                <td [id]="i+'_'+filterData.key"
+                                                    [ngClass]="{'active': (filterProcessService.activeFilterLabel === filterData.key && filterProcessService.activeFilter === filters.key)}">
+                                                    {{ filterData.value.counts }}
+                                                </td>
+                                                <td [id]="i+'_'+filterData.key"
+                                                    *ngIf="filterData.value.isVisible | filterIconSelection: filterData.key: filters.key: filterData.value.counts: 'child' as filterIconPipeResult"
+                                                    [ngClass]="{'active': (filterProcessService.activeFilterLabel === filterData.key && filterProcessService.activeFilter === filters.key)}">
+                                                    <input type="checkbox" [ngModel]="filterData.value.isVisible"
+                                                        [attr.name]="filters.key" [value]="filterData.key"
+                                                        (change)="handleFilterValClick($event, filters.key)"
+                                                        class="{{filterIconPipeResult}}"
+                                                        [disabled]="(filterIconPipeResult).includes('disabledEye') ? true : false"
+                                                        [id]="i+'_ch_'+filterData.key+'_'+filters.key" />
+                                                    <span>
+                                                        <label for="{{i+'_ch_'+filterData.key+'_'+filters.key}}"> <img
+                                                                [ngClass]="{'disabled-icon': (filterIconPipeResult).includes('disabledEye') == true}"
+                                                                [src]="filterIconPipeResult" alt=""> </label>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </tab>
+                </ng-container>
+            </tabset>
+        </div>
+    </div>
+</div>

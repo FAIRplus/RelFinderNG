@@ -1,0 +1,78 @@
+<div mat-dialog-title>
+    <span class="heading" id="upload_config_file">Upload Configuration File</span>
+    <div class="pull-right">
+        <button type="button" id="upload_config_file_close_btn" class="btn btn-link" (click)="closeMe()">
+            <img class="closeIcon pull-right" src="assets/icons/remove_field.svg" alt="" /></button>
+    </div>
+</div>
+<hr>
+<mat-dialog-content class="panel-wrapper">
+    <div class="uploadfilecontainer">
+        <div class="centerFlex">
+            <img class="uploadImg" src="assets/icons/upload.svg" alt="">
+            <h5 class="dragDrop">Drag & Drop your file here</h5>
+            <h5 class="orText">or</h5>
+            <input id="browseBtn" type="file" [multiple]="false" (change)="uploadFile($event.target.files)" #myFileInput accept="application/json" style="display:none;">
+            <label class="btn file-btn" for="browseBtn">Browse File</label>
+        </div>
+    </div>
+    <div class="divider" *ngIf="files.length > 0"></div>
+    <div class="fileContainer" *ngIf="files.length > 0">
+        <div class="files-list">
+            <div class="single-file" *ngFor="let file of files; let i = index">
+                <img class="fileType" [src]="isError ? 'assets/icons/errorJsonFile.svg' : 'assets/icons/jsonFile.svg'" alt="">
+                <div class="info">
+                    <h4 class="fileName">
+                        {{fileName}}
+                        <span class="size">{{ uploadPercent }}&nbsp;/&nbsp;{{ formatBytes(file?.size) }}</span>
+                    </h4>
+                    <div class="progress-cont progress">
+                        <span role="progressbar" [style.width]="isError ? '100%' : progress + '%'" [ngClass]="isError ? 'progress-bar progress-bar-danger progress-bar-striped active' : 'progress-bar progress-bar-success progress-bar-striped active'">
+                        </span>
+                    </div>
+                </div>
+                <img src="assets/icons/remove_field.svg" class="delete" alt="" (click)="deleteFile(i)">
+            </div>
+        </div>
+        <div class="infoPan">
+            <div *ngIf="alertMsg?.type?.trim() === 'success'">
+                <p class="success-text" [innerHTML]="alertMsg.message"></p>
+            </div>
+            <div *ngIf="alertMsg?.type?.trim() === 'error'">
+                <div class="errorLine" [innerHTML]="firstErrBegin"></div>
+                <span class="error-text" [innerHTML]="firstErrEnd"></span>
+                <span *ngIf="alertMsg?.messageList?.length > 1" class="more-text" [tooltip]="errorlist">
+                    <!-- placement="right" triggers="click"> -->
+                    <span class="moreItem">&nbsp; Know More..</span>
+                </span>
+                <!-- <p class="error-text" [innerHTML]="alertMsg?.messageList[0]?.message | sanitizeHtml">
+                </p> -->
+            </div>
+        </div>
+        <div *ngIf="fileContent && !loadingBar && progress === 100">
+            <pre [innerHTML]=" fileContent | prettyjson" slimScroll [ngClass]="{'error-border': isError}">
+                </pre>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="btn-group pull-right" *ngIf="files.length > 0">
+    <div class="footerBtns">
+        <button class="btn btn-validate" type="button" [disabled]="validateDisable" (click)="validateFile()" *ngIf="!isError && confirmDisable">Validate</button>
+        <button class="btn uploadBtn" [disabled]="confirmDisable" type="button" (click)="replaceConfig()" *ngIf="!confirmDisable && !isError">Upload
+        </button>
+        <button for="browseBtn" (click)="resetValidClick()" class="btn newFileUpload" *ngIf="isError">Upload New
+            File</button>
+    </div>
+</mat-dialog-actions>
+
+<ng-template #errorlist>
+    <div class="tooltip-title">Multiple <span class="tooltip-error">Error</span> Identified</div>
+    <ul>
+        <li *ngFor="let err of alertMsg?.messageList; let i = index">
+            <!-- <p class="list-item" [innerHtml]="err?.message"></p> -->
+            <span class="list-item">
+                {{err?.message}}
+            </span>
+        </li>
+    </ul>
+</ng-template>

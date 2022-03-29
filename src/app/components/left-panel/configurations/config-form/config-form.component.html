@@ -1,0 +1,272 @@
+<div class="text-header row">
+    <p class="text-area pull-left col-xs-auto" *ngIf="editMode; else createMode;" [matTooltip]="DB_name.length > 40 ? this.DB_name : ''" matTooltipPosition="below" matTooltipClass="material-tooltip">Edit Database: <span class="db-text">{{ DB_name | truncateString:40:'truncat-end' | firstCaseUpper }}</span></p>
+    <ng-template #createMode>
+        <p class="text-area pull-left col-xs-auto" id="create_source_title">Create Source</p>
+    </ng-template>
+    <span class="pull-right col-xs-auto"><mat-icon><img id="img_close_dialog_btn" class="img-responsive closeIcon pull-right" (click)="onDismiss()" src="assets/icons/remove_field.svg"></mat-icon></span>
+    <p class="save-btn-p pull-right col-xs-auto"><button class="save-btn" (click)="onSubmit()" id="save_source_data">Save Data<img class="save-image" src="assets/icons/save.svg" ></button></p>
+</div>
+<mat-dialog-content slimScroll>
+    <div class="card">
+        <div class="card-body">
+            <form [formGroup]="sourceForm" (ngSubmit)="onSubmit()" id="source_form">
+                <table>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label>Name <span class="asterik-field"><sup>*</sup></span></label>
+                        </td>
+                        <td class="col-xs-9">
+                            <input type="text" formControlName="name" class="input-type-text-box" id="source_name" [ngClass]="{ 'input-error-border': (f.name.touched || submitted) && f.name.errors }" />
+                            <div *ngIf="(f.name.touched || submitted) && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required" class="text-danger">Enter Name</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="Unique ID for Endpoint Configuration" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                ID <span class="asterik-field"><sup>*</sup></span>
+                            </label>
+                        </td>
+                        <td class="col-xs-9">
+                            <input type="text" [ngStyle]="{'background-color':editMode ? '#f5f5f5' : '' }" formControlName="id" #idVal class="input-type-text-box" id="source_id" (input)="checkDuplicate($event.target.value)" [ngClass]="{ 'input-error-border': (f.id.touched || submitted) && f.id.errors }"
+                            />
+                            <div *ngIf="(f.id.touched || submitted) && f.id.errors" class="invalid-feedback">
+                                <div *ngIf="f.id.errors.required" class="text-danger">Enter ID</div>
+                                <div *ngIf="f.id.errors.duplicate" class="text-danger">Sorry, ID already exists with this name.
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label>Description</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <input type="text" formControlName="description" class="input-type-text-box" id="source_description" />
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="The URL of SparkQL Endpoint" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                Endpoint URI <span class="asterik-field"><sup>*</sup></span></label>
+                        </td>
+                        <td class="col-xs-9">
+                            <input type="text" formControlName="endpointURI" class="input-type-text-box" id="source_endpointUri" [ngClass]="{ 'input-error-border': (f.endpointURI.touched || submitted) && f.endpointURI.errors }" />
+                            <div *ngIf="(f.endpointURI.touched || submitted) && f.endpointURI.errors" class="invalid-feedback">
+                                <div *ngIf="f.endpointURI.errors.required" class="text-danger">Enter Endpoint URI</div>
+                                <div *ngIf="f.endpointURI.errors.pattern" class="text-danger">Invalid URI.</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="The default graph which should be used for the search" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                Default GraphURI</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <input type="text" formControlName="defaultGraphURI" class="input-type-text-box" id="source_defaultGraphUri" [ngClass]="{ 'input-error-border': (f.defaultGraphURI.touched || submitted) && f.defaultGraphURI.errors }" />
+                            <div *ngIf="(f.defaultGraphURI.touched || submitted) && f.defaultGraphURI.errors" class="invalid-feedback">
+                                <!-- <div *ngIf="f.defaultGraphURI.errors.required" class="text-danger">Enter Default GraphURI</div> -->
+                                <div *ngIf="f.defaultGraphURI.errors.pattern" class="text-danger">Invalid URI.</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="Prevents RelFinder from appending '/sparql?' to the defined endpointURI" matTooltipClass="material-tooltipMenu" matTooltipPosition="right" for="dontAppendSparql" class="form-check-label">
+                                Don't append '/sparql'?</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <div class="checkbox-circle">
+                                <input type="checkbox" id="dontAppendSparql" formControlName="dontAppendSparql" />
+                                <label for="dontAppendSparql" class="form-check-label"></label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="Select choice for autocomplete suggestion" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                Query Type</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <mat-form-field floatLabel="never" class="selectBox">
+                                <mat-select class="form-control" id="querySelection" formControlName="queryType"
+                                    class="mat-top-panel">
+                                    <mat-option [value]="opt.value" *ngFor="let opt of queryTypes">
+                                        {{ opt.key |firstCaseUpper}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <!-- <tr class="row">
+                        <td class="col-xs-3">
+                            <label for="isVirtuoso" class="form-check-label">Is Virtuoso server?</label>
+                            <span class="space-between"> &nbsp;</span>
+                            <span class="space-between"> &nbsp;</span>
+                        </td>
+                        <td class="col-xs-9">
+                            <div class="checkbox-circle">
+                                <input type="checkbox" id="isVirtuoso" formControlName="isVirtuoso" />
+                                <label for="isVirtuoso" class="form-check-label"> </label>
+                            </div>
+                        </td>
+                    </tr> -->
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="If the SPARQL server has NO crossdomain.xml, set this value = true, to forward all queries to the defined proxy server" matTooltipClass="material-tooltipMenu" matTooltipPosition="right" for="useProxy" class="form-check-label">Use Proxy</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <div class="checkbox-circle">
+                                <input type="checkbox" id="useProxy" formControlName="useProxy" />
+                                <label for="useProxy" class="form-check-label"> </label>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="HTTP method for SPARQL requests" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                Method</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <mat-form-field floatLabel="never" class="selectBox">
+                                <mat-select class="form-control" id="source_httpMethod" formControlName="method"
+                                    class="mat-top-panel">
+                                    <mat-option [value]="opt.key" *ngFor="let opt of httpMethods">
+                                        {{ opt.key |firstCaseUpper}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                            <!-- <select formControlName="method" class="input-type-select-box" id="source_httpMethod">
+                                <option class="input-type-select-option" value="POST">POST</option>
+                                <option class="input-type-select-option" value="GET">GET</option>
+                            </select> -->
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="The maximum length of relations RelFinder will search for" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">Max Relation Length <span class="asterik-field"><sup>*</sup></span></label>
+                        </td>
+                        <td class="col-xs-9">
+                            <div class="relation-length-area">
+                                <input type="number" max="10" min="2" formControlName="maxRelationLength" class="input-type-text-box range-box" id="source_maxRelationPath" [ngClass]="{ 'input-error-border': (f.maxRelationLength.touched || submitted) && f.maxRelationLength.errors }"
+                                />
+                            </div>
+                            <div *ngIf="(f.maxRelationLength.touched || submitted) && f.maxRelationLength.errors" class="invalid-feedback">
+                                <div class="text-danger">Enter 'Max Relation Length' in range 2 to 10.</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="A list of properties which will be used for autocomplete search and Input Disambiguation Process.  You can always Identify Resource name referring to Link (http://www.w3.org/2000/01/rdf-schema#label)" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">Autocomplete URIs</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <mat-form-field class="autocomplete-uri-list-input input-type-text-box">
+                                <mat-chip-list #AutoCompleteURIs aria-label="URI Input">
+                                    <mat-chip class="chip-style" *ngFor="let autouri of autocompleteUris" [selectable]="selectable" [removable]="removable" (removed)=removeAutoUri(autouri)>
+                                        {{autouri}}
+                                        <mat-icon class="mat-chip-remove" matChipRemove *ngIf="removable"><img class="close-chip-img" src="assets/icons/remove_field.svg"></mat-icon>
+                                    </mat-chip>
+                                    <input id="source_autocompleUris" [matChipInputFor]="AutoCompleteURIs" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addAutoUri($event)">
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="View Graph Data in Different Languages based on Dropdown Selections" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">Autocomplete Language</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <input type="text" formControlName="autocompleteLanguage" class="input-type-text-box" id="source_autocompleteLanguage" [ngClass]="{ 'input-error-border': (f.autocompleteLanguage.touched || submitted) && f.autocompleteLanguage.errors }" />
+                            <div *ngIf="(f.autocompleteLanguage.touched || submitted) && f.autocompleteLanguage.errors" class="invalid-feedback">
+                                <div *ngIf="f.autocompleteLanguage.errors.required" class="text-danger">Please enter Autocomplete Language.</div>
+                            </div>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="Properties which should not be Shown in the result graph" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                Ignored Properties</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <mat-form-field class="ignored-properties-list input-type-text-box">
+                                <mat-chip-list #IgnoredPropsList arial-label="Ignored Properties">
+                                    <mat-chip class="chip-style" *ngFor="let prop of ignoredProperties" [selectable]="selectable" [removable]="removable" (removed)=removeProp(prop)>
+                                        {{prop}}
+                                        <mat-icon class="mat-chip-remove" matChipRemove *ngIf="removable"><img class="close-chip-img" src="assets/icons/remove_field.svg"></mat-icon>
+                                    </mat-chip>
+                                    <input id="source_ignoredPropsList" [matChipInputFor]="IgnoredPropsList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addProp($event)">
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="A list of property URI of abstracts or discriptions of the resource, which should be displayed in the info boxes, based on availability" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                Abstract URIs</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <mat-form-field class="abstract-uris-list input-type-text-box">
+                                <mat-chip-list #AbstractURIs aria-label="Abstract URIs">
+                                    <mat-chip class="chip-style" *ngFor="let absuri of abstractUris" [selectable]="selectable" [removable]="removable" (removed)=removeAbsURI(absuri)>
+                                        {{absuri}}
+                                        <mat-icon class="mat-chip-remove" matChipRemove *ngIf="removable"><img class="close-chip-img" src="assets/icons/remove_field.svg"></mat-icon>
+                                    </mat-chip>
+                                    <input id="source_abstractUris" [matChipInputFor]="AbstractURIs" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)=addAbsURI($event)>
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="A list of property URI of images which should be displayed in the info boxes, based on availability" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                Image URIs</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <mat-form-field class="image-uris-list input-type-text-box">
+                                <mat-chip-list #ImageURIs aria-label="Image URIs">
+                                    <mat-chip class="chip-style" *ngFor="let imguri of imageUris" [selectable]="selectable" [removable]="removable" (removed)=removeImguri(imguri)>
+                                        {{imguri}}
+                                        <mat-icon class="mat-chip-remove" matChipRemove *ngIf="removable"><img class="close-chip-img" src="assets/icons/remove_field.svg"></mat-icon>
+                                    </mat-chip>
+                                    <input id="source_imageUris" [matChipInputFor]="ImageURIs" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)=addImguri($event)>
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                    <p></p>
+                    <tr class="row">
+                        <td class="col-xs-3">
+                            <label matTooltip="A list of property URI of web links which should be displayed in the info boxes" matTooltipClass="material-tooltipMenu" matTooltipPosition="right">
+                                Link URIs</label>
+                        </td>
+                        <td class="col-xs-9">
+                            <mat-form-field class="link-uris-list input-type-text-box">
+                                <mat-chip-list #LinkURIs aria-label="Link URIs">
+                                    <mat-chip class="chip-style" *ngFor="let linkuri of linkUris" [selectable]="selectable" [removable]="removable" (removed)=removeLinkuri(linkuri)>
+                                        {{linkuri}}
+                                        <mat-icon class="mat-chip-remove" matChipRemove *ngIf="removable"><img class="close-chip-img" src="assets/icons/remove_field.svg"></mat-icon>
+                                    </mat-chip>
+                                    <input id="source_linkUris" [matChipInputFor]="LinkURIs" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addLinkuri($event)">
+                                </mat-chip-list>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</mat-dialog-content>

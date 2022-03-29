@@ -1,0 +1,56 @@
+<div class="text-header row">
+    <p class="text-area floratLeft col-xs-auto">
+        <span class="title" id="query_tool_title">Query Selected Database</span>
+    </p>
+    <span class="floatRight col-xs-auto">
+        <label for="endpt" class="source">Source:</label>
+        <mat-form-field floatLabel="never" class="selectBox">
+            <mat-select name="selectedEndpoint" [(value)]="selectedEndpoint">
+                <mat-option class="control-label" *ngFor="let endpoint of endpointList; let i=index" [value]="endpoint" [attr.aria-expanded]="true" aria-controls="collapseBasic"
+                    [selected]="endpoint.id === passedEndpt" matTooltip="{{endpoint?.name | firstCaseUpper}}"
+                    matTooltipPosition="left" matTooltipClass="material-tooltipGraph">
+                    {{endpoint?.name | truncateString:18:'truncat-end'| firstCaseUpper}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button id="exeQueryBtn" [disabled]="query.length <= 10" class="btn executeBtn" (click)="onExecute()">
+            <span [ngClass]="query.length <= 10 ? 'disable-text' : 'enable-text'">Excecute</span>
+    </button>
+    <div class="floatRight closeBtn">
+        <button type="button" class="btn btn-link" (click)="closeDialog()" id="closeImg">
+                <img class="closeImg" src="assets/icons/remove_field.svg" alt=""></button>
+    </div>
+    </span>
+
+</div>
+
+<mat-dialog-content class="flexBodyContainer">
+    <div class="panel-group">
+        <div class="panel panel-default outter-panel">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label id="queryPanLabel" class="sub-heading">Enter the Query</label>
+                        <div class="panel panel-default">
+                            <div id="queryPan" class="note-editable panel-body sub-panel" id="queryText" contenteditable="true" (input)="onInput($event)" (paste)="onPaste($event)" slimScroll>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6 col-lg-6">
+                        <label class="sub-heading">Response:</label>
+                        <span class="error-span" *ngIf="hasError">
+                            <span class="btn error-info">Error in Response</span>
+                        </span>
+                        <div class="panel panel-default" [ngClass]="{'panel-default': hasError === false, 'error-panel': hasError === true}">
+                            <div class="panel-body sub-panel" slimScroll>
+                                <p contenteditable="false" class="query-response" [innerHTML]="response | prettyjson">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

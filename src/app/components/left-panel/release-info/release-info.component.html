@@ -1,0 +1,61 @@
+<div class="text-header">
+    <div class="headerContainer">
+        <div id="releaseInfoHeading" class="main-heading">
+            Release Updates
+            <button class="btn versionLabel">Ver {{releases?.version}}</button>
+        </div>
+    </div>
+    <div class="closeContainer">
+        <button id="relcloseBtn" type="button" class="btn btn-link" (click)="closeDialog()">
+            <img id="relCloseImg" class="closeImg" src="assets/icons/remove_field.svg" alt=""></button>
+    </div>
+</div>
+<mat-dialog-content class="flexContainer">
+    <div class="panel-group">
+        <div class="panel panel-default outter-panel">
+            <div class="panel-body">
+                <tabset type="tabs">
+                    <tab heading="New Release" class="content">
+                        <div class="container-fluid content">
+                            <div *ngFor="let item of releases?.newReleases">
+                                <label class="list-item">
+                                    <span> <img class="itemImg" src="assets/icons/greenPlus.svg" alt="*"> </span>
+                                    {{item}}</label>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Bugs Resolved" class="content">
+                        <div class="container-fluid content">
+                            <div *ngFor="let item of releases?.bugsResolved">
+                                <label class="list-item">
+                                    <span> <img class="itemImg" src="assets/icons/redTick.svg" alt="*"> </span>
+                                    {{item}}</label>
+                            </div>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions class="footerContainer">
+    <div class="orgContainer">
+        <span class="footerText">
+            <img class="copyrightImg" src="assets/icons/copyright.svg" alt="@">
+            {{releases?.links?.licYear}}
+            {{releases?.links?.orgName}}
+        </span>
+    </div>
+    <div class="policyContainer">
+        <span class="policyBox">
+            <a class="footerText" (click)="onPolicyClick()">Privacy Policy</a>
+        </span>
+        <span class="placeDivider">
+            |
+        </span>
+        <span class="termsBox">
+            <a class="footerText" (click)="onTermsClick()">Terms of Use</a>
+        </span>
+    </div>
+
+</mat-dialog-actions>

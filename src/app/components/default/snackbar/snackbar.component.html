@@ -1,0 +1,13 @@
+<div class="snack-bar-container">
+    <div class="custom-snack-bar">
+        <div class="iconTitleBox">
+            <span class="snackIcon"><img src="assets/icons/toastr-success.svg" alt=""></span>
+            <div class="titleConstainer">
+                <span>{{data?.title.length > 25 ? (data?.title | truncateString:25:'truncat-end') : data?.title}}{{data?.message}}</span>
+            </div>
+        </div>
+        <div>
+            <span class="pull-right" (click)="dismissSnackBar()"><img class="closeIcon" src="assets/icons/remove_field.svg" alt="close"></span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,122 @@
+.navbar-brand {
+    margin-top: 10px;
+    margin-bottom: 148%;
+    width: 100%;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #ffffff;
+    padding: 4px 11.3px;
+    box-sizing: border-box;
+    -webkit-transition: 0.3s ease;
+    transition: 0.3s ease;
+    text-decoration: none;
+    cursor: pointer;
+    margin-bottom: 15px;
+}
+
+.navbar-inverse .navbar-nav>li>a>span {
+    padding-left: auto;
+    padding-right: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tab-active {
+    text-decoration: none;
+    box-shadow: inset -5px 0px 0px 0px #E65A14;
+}
+
+span {
+    color: #ffffff;
+    font-weight: bolder;
+    font-size: 8px;
+    font-family: Roboto;
+    text-align: center;
+}
+
+.navbar-inverse .navbar-brand {
+    color: white;
+}
+
+ul {
+    text-align: center;
+    height: 100%;
+}
+
+.menu-icon {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 16px;
+    height: 16px;
+}
+
+.menu-disabled {
+    opacity: 0.3;
+    cursor: not-allowed !important;
+    pointer-events: none;
+}
+
+.popover>.arrow:after {
+    content: "/assets/icons/icons_left_arrow.svg";
+    border-width: 5px;
+}
+
+.popover.right>.arrow:after {
+    bottom: -10px;
+    left: 1px;
+    content: " ";
+    border-right-color: #fff;
+    border-left-width: 0;
+}
+
+.company-logo {
+    width: 20px;
+    height: 28px;
+}
+
+.navbar-inverse {
+    border-color: initial;
+    z-index: 1;
+}
+
+.navbar-fixed-left {
+    width: 55px;
+}
+
+.updateMenuIcon {
+    width: 20px;
+    height: 20px;
+}
+
+.menuLine2 {
+    color: #ffffff;
+    font-weight: bolder;
+    font-size: 8px;
+    font-family: Roboto;
+    text-align: center;
+    line-height: 13px;
+    padding-top: 8px;
+    margin-left: -5px;
+    text-align: center;
+}
+
+.menu-group {
+    padding-left: 0px;
+    display: flex;
+    height: 100%;
+}
+
+.navbar-fixed-left .navbar-nav>li {
+    margin: 0px;
+    width: inherit;
+    padding: 0px;
+    font-size: 20px;
+    border-left-width: 0px;
+    border-left-style: solid;
+    border-top-width: 0px;
+    border-top-style: solid;
+    color: white;
+    height: 40px;
+}

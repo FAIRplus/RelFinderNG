@@ -1,0 +1,80 @@
+.snack-bar-container {
+    border-radius: 4px;
+    box-sizing: border-box;
+    display: block;
+    margin: 24px;
+    max-width: 33vw;
+    min-width: 300px;
+    padding: 14px 16px;
+    min-height: 48px;
+    transform-origin: center;
+    color: #FFFFFF;
+    background: #434343;
+    border-radius: 4px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+}
+
+.custom-snack-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    line-height: 20px;
+    opacity: 1;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.snackbarAction {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FFFFFF;
+}
+
+.snackIcon {
+    padding-right: 10px;
+    padding-top: 5px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.divider-line {
+    width: 49px;
+    height: 0px;
+    margin-top: 14px;
+    border: 1px solid #FFFFFF;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.btn-outline:hover {
+    color: #FFFFFF;
+}
+
+.iconTitleBox {
+    display: flex;
+    flex-direction: row;
+    min-width: 150px;
+}
+
+.titleConstainer {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.closeIcon {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 20px;
+    height: 20px;
+    margin-left: 15px;
+}
+
+.pull-right {
+    padding-left: 20px;
+}

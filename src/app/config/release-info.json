@@ -1,0 +1,26 @@
+{
+    "version": "1.0",
+    "newReleases": [
+        "Proxy server URL configuration UI added",
+        "Multiple Suggestions Dropdown Feature Introduced",
+        "Filters Shown out apparently for better Accessiblity and Usability",
+        "Full Screen Feature Enabled for Better View",
+        "Zoom In and Out Components Introduced alongside 4 Sided Navigation",
+        "Node Differentiations shown in Current version with better UI for graph"
+    ],
+    "bugsResolved": [
+        "Added proxy server utilization for relationship queries",
+        "Auto Suggestion feature - Data not getting repopulated",
+        "Info Section, Language with Flag not shown",
+        "Filters Contents Scroll",
+        "Full Screen Feature Enabled for Better View",
+        "Zoom In and Out Components Introduced alongside 4 Sided Navigation",
+        "Node Differentiations shown in Current version with better UI for graph"
+    ],
+    "links": {
+        "privacyPolicy": "https://www.novartis.com/privacy-policy",
+        "TermsOfUse": "https://www.novartis.com/terms-use",
+        "orgName": "Novartis AG",
+        "licYear": "2020"
+    }
+}

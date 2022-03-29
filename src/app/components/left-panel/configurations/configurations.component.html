@@ -1,0 +1,105 @@
+<div class="form-container">
+    <div *ngIf="!isDataAvailable; else configurations;">
+        <div class="panel panel-default borderless-panel">
+            <div class="panel-heading">
+                <p class="sub-title">No Database</p>
+                <p class="title">
+                    Added yet!
+                </p>
+            </div>
+            <div class="panel-body emptyConfig">
+                <div>
+                    <img class="emptyConfigIcon" src="assets/icons/emptyConfig.svg" alt="" />
+                </div>
+                <div class="title"> Oops!</div>
+                <div class="emptyWarningTxt">
+                    Looks like you have not added Database source yet
+                </div>
+                <div>
+                    <button class="btn addNewDB" (click)="createDialog()">Add New Database</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #configurations>
+
+    <div class="panel panel-default borderless-panel">
+        <div class="panel-heading" #tooltip="matTooltip" (mousemove)="tooltip.hide()" matTooltip="Selected Data Source moved to top" matTooltipPosition="above" matTooltipClass="material-tooltipBounce float">
+            <p class="sub-title">Selected Database</p>
+            <p class="title" id="selected_source" [matTooltip]="configHeader.length>25 ? (configHeader | firstCaseUpper) : ''" matTooltipClass="material-tooltipConfig" matTooltipPosition="right">
+                {{ configHeader | truncateString:25:'truncat-end'| firstCaseUpper}}</p>
+        </div>
+        <div class="panel-body" style="position: relative;" slimScroll [options]="opts" [scrollEvents]="scrollEvents">
+            <form class="form-body" [formGroup]="settingForm" (ngSubmit)='onSubmit()' #f="ngForm">
+                <div class="row row-lines" *ngFor="let data of endpoints; let i=index">
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="col-xs-10 col-sm-10">
+                            <label class="radio-inline" id="{{data.id}}">   
+                                <span id="{{ data.id }}">
+                                    <p class="list-item" id="source_name_{{i}}"
+                                        [matTooltip]="data?.name.length > 20 ? (data?.name | firstCaseUpper) : ''" matTooltipClass="material-tooltipConfig"
+                                        matTooltipPosition="right">
+                                        {{ data.name | truncateString:20:'truncat-end'| firstCaseUpper}}</p>
+                                    <p class="list-item-info" [matTooltip]="data?.description.length > 75 ? (data?.description | firstCaseUpper) : ''"
+                                        matTooltipClass="material-tooltipDesc" matTooltipPosition="right">
+                                        {{ (data.description ? data.description : data.id) | truncateString:75:'truncat-end'| firstCaseUpper}}
+                                    </p>
+                                </span>
+                            <input id="{{data.id}}" class="list-item" value="{{data.id}}" name="source" formControlName="source" (change)="onDbChange($event)" type="radio" />
+                            <span id="{{data.id}}" class="radio-select"></span>
+                            </label>
+                        </div>
+
+                        <div class="col-xs-2 col-sm-2">
+                            <button id="dropdown-autoclose-{{i}}" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                                <img class="sub-menu-icon" src="assets/icons/sub_menu.svg">
+                            </button>
+                            <mat-menu #menu="matMenu">
+                                <button id="edit_source_{{i}}" mat-menu-item (click)="openEditDialog(data)">
+                                    <img class="nested-sub-menu-icon" src="assets/icons/edit_DB.svg" alt="">
+                                    <span class="subItem">Edit Database</span>
+                                </button>
+                                <mat-divider></mat-divider>
+                                <button id="delete_source_{{i}}" mat-menu-item (click)="delete(data)">
+                                    <img class="nested-sub-menu-icon" src="assets/icons/delete_DB.svg" alt="">
+                                    <span class="subItem">Delete Database</span>
+                                </button>
+                            </mat-menu>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            <img (click)="createDialog()" class="footer-icon" src="assets/icons/add_database.svg" alt="" id="add_new_source">
+            <span (click)="createDialog()" class="footer-text">ADD DATABASE</span>
+            <div class="divider-line"></div>
+            <img (click)="loadConfig()" class="footer-icon" src="assets/icons/load_config.svg" alt="" id="upload_file">
+            <span (click)="loadConfig()" class="footer-text">LOAD CONFIGS</span>
+            <div class="divider-line"></div>
+            <div class="footerSubmenu">
+                <button id="button-autoclose-menus" mat-icon-button [matMenuTriggerFor]="menu2" aria-label="icon-button with a menu">
+                    <img class="rotateImg" src="assets/icons/sub_menu.svg">
+                </button>
+                <mat-menu #menu2="matMenu">
+                    <button id="query_tool" mat-menu-item (click)="loadQueryTool()">
+                        <img class="nested-sub-menu-icon" src="assets/icons/query_db.svg" alt="">
+                        <span class="subItem"> Query Tool</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="LoadConfigGlobalProxy()">
+                        <img class="nested-sub-menu-icon-save" src="assets/icons/proxy_menu.svg" alt="">
+                        <span class="subItem subItemSave"> Proxy Config</span>
+                    </button>
+                    <mat-divider></mat-divider>
+                    <button mat-menu-item (click)="downloadConfigurations()">
+                        <img class="nested-sub-menu-icon-save" src="assets/icons/save_all.svg" alt="">
+                        <span class="subItem subItemSave"> Save All Configs</span>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+</ng-template>

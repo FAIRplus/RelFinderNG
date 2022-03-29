@@ -1,0 +1,30 @@
+<div class="text-header">
+    <div class="headerContainer">
+        <span id="shareUrlHeading" [matTooltip]="endpointName" matTooltipPosition="above" matTooltipClass="material-tooltiptop" class="main-heading">URL of
+            &nbsp;{{endpointName.length > 30 ? (endpointName | truncateString:30:'truncat-end' | firstCaseUpper) : endpointName}}</span>
+    </div>
+    <div class="closeContainer">
+        <div>
+            <button type="button" class="btn btn-link copy-btn" (click)="copyToClipboard()">Copy<img class="copyIcon" src="assets/icons/copyURL.svg" alt="">
+            </button>
+        </div>
+        <div>
+            <button id="shareUrlBtn" type="button" class="btn btn-link closeBtn" (click)="closeDialog()">
+                <img id="closeShareURL" class="closeImg" src="assets/icons/remove_field.svg" alt=""></button>
+        </div>
+    </div>
+</div>
+<mat-dialog-content class="flexContainer">
+    <div class="urlText">
+        <span class="url-link">URL Link</span>
+    </div>
+    <div class="flexBody">
+        <p (click)="copyToClipboard()" slimScroll>
+            {{formData}}
+        </p>
+        <div id="successInfo" class="successInfo" *ngIf="isCopied">
+            <img src="assets/icons/successTick.svg" alt="">
+            <span class="success-info">URL copied to clipboard successfully</span>
+        </div>
+    </div>
+</mat-dialog-content>

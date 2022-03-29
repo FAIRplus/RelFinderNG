@@ -1,0 +1,60 @@
+<div *ngIf="visStatus == this.constantService.FINISHED || visStatus == this.constantService.LOADED" class="panel container-fluid">
+    <div class="row" *ngIf="allFilters">
+        <div class="col-xs-12 group">
+            <div class="drop-down">
+                <span class="show-results-text">Show Results by</span>
+                <form [formGroup]="filterKeyForm">
+                    <div class="form-group">
+                        
+                        <mat-select class="form-control" id="filtersSelection" (selectionChange)="changeFilter($event.value)" formControlName="filterKeyControl" class="mat-top-panel">
+                            <mat-option style="font-weight: 500;font-size: 14px;font-style:Roboto;" [value]="filters.key" *ngFor="let filters of allFilters | keyvalue : asIsOrder">
+                                {{ filters.key |firstCaseUpper}}
+                            </mat-option>
+                        </mat-select>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-12 badge-container" id="filterParent" slimScroll>
+                <p class="divider-space">&nbsp;</p>
+                <span *ngIf="filteredData.length > 0;else LoadData">
+                    <span class="badges-area" *ngFor="let data of filteredData; let i = index;">
+                        <button class="badges" [id]="data.label" [name]="i"
+                            [ngClass]="{'active': (filterProcessService.activeFilterLabel === data.label && filterProcessService.activeFilter === data.filterType)}"
+                            (click)="filterProcessService.highlightNodesEdges(data.label, data.filterType)"
+                            [matTooltip]="data.label" matTooltipPosition="above" [matTooltipClass]="topPanelTooltipClass" 
+                            aria-label="Button that displays information about the badges">
+                            {{ data.updatedLabel }} ({{ data.count }})
+                            <span class="badge pull-right"
+                                *ngIf="data.selected | filterIconSelection: data.label: filterProcessService.activeFilter: data.count: 'child' as filterIconPipeResult">
+                                <input type="checkbox" [ngModel]="data.selected" [value]="data.label"
+                                    (change)="handleFilterClick($event, filterProcessService.activeFilter)"
+                                    [class]="filterIconPipeResult"
+                                    [disabled]="(filterIconPipeResult).includes('disabledEye') ? true : false"
+                                    [id]="i+'_ch_'+data.label+'_top_'+filterProcessService.activeFilter" />
+
+                                <span>
+                                    <label for="{{i+'_ch_'+data.label+'_top_'+filterProcessService.activeFilter}}">
+                                        <img [ngClass]="{'disabled-icon': (filterIconPipeResult).includes('disabledEye') == true}"
+                                            [src]="filterIconPipeResult" alt=""> </label>
+                                </span>
+
+                </span>
+                </button>
+                </span>
+                </span>
+                <ng-template #LoadData>
+                    <p>
+                        <button class="badges"><img alt="" class="topFilterLoaderGif"
+                                src="assets/icons/loader_animation_orange.gif"> </button>
+                    </p>
+                </ng-template>
+            </div>
+        </div>
+    </div>
+    <span class="left-toggle-space" *ngIf="!isCollapsedLeft">
+        <button class="left-toggle" (click)="isCollapsedToggle()" [attr.aria-expanded]="isCollapsedLeft" aria-controls="collapseMenu"></button>
+    </span>
+    <span class="right-toggle-space" *ngIf="isCollapsedLeft">
+        <button class="right-toggle" (click)="isCollapsedToggle()" [attr.aria-expanded]="isCollapsedLeft" aria-controls="collapseMenu"></button>
+    </span>
+</div>

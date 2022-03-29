@@ -1,0 +1,502 @@
+.file-btn {
+    /* width: 94.31px; */
+    height: 32px;
+    background: #E65A14;
+    box-shadow: 0px 4px 4px rgba(230, 90, 20, 0.25);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 11px;
+    color: #FFFFFF;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 10px;
+}
+
+.uploadfilecontainer {
+    background: url('/assets/icons/dropZone.svg') no-repeat !important;
+    background-position: center;
+    margin: 20px auto;
+    border-radius: 20px;
+    width: 331px;
+    height: 207px;
+    transition: all 1s;
+    border: 1.5px dashed #838383;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.fileover {
+    animation: shake 1s;
+    animation-iteration-count: infinite;
+}
+
+.files-list .single-file {
+    display: flex;
+    padding-top: 0.5rem 0rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    border: 0;
+    flex-grow: 1;
+}
+
+.files-list .single-file img.delete {
+    cursor: pointer;
+    align-self: flex-end;
+    height: 11px;
+    margin-bottom: 3px;
+}
+
+.files-list .single-file .fileName {
+    text-align: left;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 14px;
+    color: #343841;
+    margin-bottom: 6px;
+}
+
+.files-list .single-file .size {
+    font-size: 10px;
+    font-weight: 500;
+    color: #a4a4a4;
+    margin: 0;
+    padding-left: 10px;
+    float: right;
+}
+
+.files-list .single-file .info {
+    width: 260px;
+}
+
+.panel {
+    height: 280px;
+    width: 335px;
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    box-shadow: none;
+    margin-top: 52px;
+}
+
+.card-scroll {
+    overflow: auto;
+}
+
+hr {
+    border-top: 0.3px solid #C4C4C4;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
+
+.border-right {
+    border-right: 0.3px solid #C4C4C4;
+}
+
+pre {
+    width: 321px;
+    height: 143px;
+    overflow: auto;
+    word-break: normal !important;
+    word-wrap: normal !important;
+    white-space: pre !important;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #000000;
+    background: #FDFDFD;
+    border: 1px solid #CCCCCC;
+    box-sizing: border-box;
+    border-radius: 3px;
+    flex-grow: 1;
+}
+
+h5 {
+    font-family: Roboto;
+    color: #434343;
+}
+
+.dragDrop {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 1px;
+    color: #343841;
+}
+
+.orText {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 16px;
+    color: #838383;
+    margin: 6px 0px;
+}
+
+.progress-cont {
+    height: 4px;
+    width: 100%;
+    background: inherit;
+    border-radius: 3px;
+}
+
+.progress-cont .progress {
+    width: 0;
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    border-radius: 4px;
+    transition: 0.5s all;
+    margin-bottom: 0px;
+}
+
+.progress-bar-success {
+    background-color: #48D770;
+}
+
+.progress-bar-danger {
+    background-color: #D91010;
+}
+
+.newFileUpload {
+    /* width: 111px; */
+    height: 32px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+    color: #FFFFFF;
+    background: #E65A14;
+    border-radius: 2px !important;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.error-text {
+    color: #D91010;
+    font-size: 9px;
+    font-family: Roboto;
+    text-align: left;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    white-space: pre-wrap !important;
+    margin: 5px 0px -5px;
+}
+
+.btn-validate {
+    border-color: #E65A14;
+    background: #E65A14;
+    /* width: 85px; */
+    height: 32px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+    color: #FFFFFF;
+    border-radius: 2px !important;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.btn btn-warning {
+    background-color: #E65A14;
+    color: #FFFFFF;
+    border-radius: 2px !important;
+}
+
+.success-text {
+    color: #129D39;
+    font-size: 10px;
+    font-family: Roboto;
+    text-align: left;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    white-space: pre-wrap !important;
+    margin: 15px 0px;
+}
+
+.heading {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 900;
+    font-size: 15px;
+    line-height: 15px;
+    color: #000000;
+}
+
+.panel-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.centerFlex {
+    padding-top: 45px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.file-upload {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 13px;
+    color: #434343;
+}
+
+.center {
+    margin: auto;
+}
+
+.fileContainer {
+    width: 331px;
+    height: 207px;
+    display: flex;
+    flex-direction: column;
+    margin: 8px auto 0px auto;
+    animation: slide-left 1.2s ease-in-out;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.divider {
+    margin: 20px auto;
+    width: 0px;
+    height: 207px;
+    border: 0.3px solid #838383;
+    transform: rotate(0deg);
+    animation: slide-left 1.2s ease-in-out;
+    opacity: 20%;
+}
+
+@media (max-width:768px) {
+    .mat-dialog-content {
+        max-height: 207px;
+    }
+    .divider {
+        transform: rotate(180deg);
+        height: 0px;
+        width: 308px;
+    }
+    .panel-wrapper {
+        overflow: auto;
+    }
+     :host ::ng-deep .mat-dialog-container {
+        padding-top: 15px;
+        overflow: hidden;
+    }
+}
+
+:host ::ng-deep .mat-dialog-title {
+    margin: 0 0 10px;
+    display: block;
+}
+
+:host ::ng-deep .mat-dialog-container {
+    padding-top: 15px;
+    overflow: hidden;
+}
+
+
+/* .panelClose {
+    float: right;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+} */
+
+.fileType {
+    width: 27px;
+    padding-top: 10px;
+}
+
+.errorFile {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    color: #D91010;
+}
+
+.progress {
+    margin-bottom: 0px;
+}
+
+.uploadBtn {
+    border-color: #E65A14;
+    background-color: inherit;
+    /* width: 85px; */
+    height: 32px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+    color: #FFFFFF;
+    background: #E65A14;
+    border-radius: 2px !important;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.footerBtns {
+    padding-right: 15px;
+}
+
+@keyframes slide-left {
+    0% {
+        transform: translateX(50%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.uploadImg {
+    width: 36px;
+    padding-bottom: 10px;
+}
+
+.error-border {
+    border-color: #D91010;
+}
+
+btn {
+    background-color: inherit;
+}
+
+.closeIcon {
+    cursor: pointer;
+    /* padding-top: 10px; */
+    height: 16px;
+    width: 16px;
+    margin-top: -2px;
+    margin-bottom: 8px;
+}
+
+.infoPan {
+    min-height: 40px;
+    padding-bottom: 10px;
+}
+
+p {
+    width: 320px;
+    margin: 0 0 5px;
+}
+
+.tooltip-title {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 12px;
+    text-align: left;
+    color: #434343;
+    padding: 8px 0px 12px 10px
+}
+
+.moreItem {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 10px;
+    color: #343841;
+}
+
+ul {
+    padding: 0px 12px 12px 20px;
+    margin: 0px;
+}
+
+li:not(:last-child) {
+    margin-bottom: 5px;
+}
+
+ul li::before {
+    color: #C4C4C4;
+}
+
+.list-item {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #434343;
+}
+
+.tooltip-error {
+    color: #D91010;
+}
+
+:host>>>.tooltip-inner {
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 11px;
+    color: #434343;
+    text-align: left;
+    max-width: 400px !important;
+    opacity: 1 !important;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+:host>>>.tooltip.top .tooltip-arrow:before,
+ :host>>>.tooltip.top .tooltip-arrow {
+    border-top-color: #434343;
+    opacity: 1 !important;
+}
+
+:host>>>.tooltip.in {
+    opacity: 1 !important;
+}
+
+.errorContainer {
+    width: inherit;
+}
+
+.errorLine {
+    font-family: Roboto;
+    font-weight: 500;
+    font-size: 10px;
+    line-height: 12px;
+    color: #D91010;
+    text-align: left;
+    margin: 5px 0px -2px;
+}
+
+.btn:focus {
+    outline: none;
+    outline-offset: 0px;
+}
+
+#upload_config_file_close_btn {
+    padding: 0px;
+}

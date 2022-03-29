@@ -1,0 +1,203 @@
+.front-loader-container {
+    display: block;
+    position: fixed;
+    align-items: center;
+    text-align: center;
+    /* margin-left: 35%;
+    margin-top: 10%; */
+    margin-left: calc(50% - 55px - 160px);
+    margin-top: calc(30% - 62px - 57px - 84px);
+}
+
+.graph-panel:focus {
+    outline: none;
+    outline-offset: 0px;
+}
+
+.panel:focus {
+    outline: none;
+    outline-offset: 0px;
+}
+
+.front-loader-gif {
+    width: 108.37px;
+    height: 101.5px;
+    /* margin-top: 15%; */
+    /* margin-left: auto;
+    margin-right: auto; */
+}
+
+.loader-text {
+    color: #464545;
+    font-weight: bold;
+    font-size: 21px;
+    line-height: 25px;
+    font-family: Roboto;
+    margin-top: 10px;
+}
+
+.loader-text-grey {
+    font-size: 19px;
+    font-family: Roboto;
+    line-height: 22px;
+    color: #7D7D7D;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0
+    }
+    100% {
+        background-position: 468px 0
+    }
+}
+
+.linear-background {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: linear-gradient(to right, #E9E9E9 8%, #dddddd 18%, #E9E9E9 33%);
+    background-size: 1000px 104px;
+    position: relative;
+    overflow: hidden;
+    width: 98px;
+    height: 10px;
+    border-radius: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.circle-frame {
+    border-radius: 50px;
+    width: 72px;
+    height: 72px;
+    margin-left: 51.5%;
+    margin-top: 6%;
+}
+
+.thick-frame {
+    width: 353px;
+    height: 10px;
+    margin-left: 11.5%;
+    margin-top: 17px;
+}
+
+.thin-frame {
+    width: 214px;
+    height: 10px;
+    margin-left: 32%;
+}
+
+.text-center {
+    text-align: center;
+    position: absolute;
+    /* top: 35%;
+    left: 35%; */
+    /* margin-left: calc(50% - 55px - 179px); */
+    margin-left: calc(29%);
+    margin-top: calc(30% - 62px - 57px - 75px);
+}
+
+.vis-mouse {
+    position: relative;
+    width: 12.92px;
+    height: 16.15px;
+    left: 47px;
+    bottom: 66px;
+    transform: matrix(-1, 0, 0, 1, 0, 0);
+}
+
+.vis-fullscreen {
+    position: absolute;
+    width: 35.92px;
+    height: 31px !important;
+    right: 40px;
+    top: 142px;
+    background: url(../../../../assets/icons/fullscreen.svg) no-repeat 8.5px center;
+    box-shadow: 0px 4px 4px rgba(131, 131, 131, 0.1);
+    border-radius: 2px;
+    border: 0.35px solid #dddddd;
+    background-color: white;
+}
+
+.vis-fullscreen:focus {
+    outline: none;
+    outline-offset: 0px;
+}
+
+.vis-fullscreen .vis-tooltip {
+    visibility: hidden;
+    width: 85px;
+    background-color: #636363;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 7px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    font-size: 10px;
+    transition: opacity 0.3s;
+}
+
+.vis-fullscreen .vis-tooltip:after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 70%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    transform: rotateX('95deg');
+    border-color: #636363 transparent transparent transparent;
+}
+
+.vis-fullscreen:hover .vis-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+.container-fluid {
+    /* padding-left: 0px; */
+    padding-left: 55px;
+    padding-right: 0px;
+    margin-bottom: 0px;
+    /* margin-left: 55px; */
+}
+
+.graph-area {
+    width: 100%;
+    height: auto;
+}
+
+.app-header {
+    transition-property: width height background-color font-size left top color;
+    transition-duration: 2s;
+    transition-delay: 0.5s;
+}
+
+.no-results-container {
+    display: block;
+    position: fixed;
+    align-items: center;
+    text-align: center;
+    margin-left: calc(50% - 55px - 252px);
+    margin-top: calc(30% - 62px - 57px - 121.5px);
+}
+
+.navbar-inverse {
+    width: 20px;
+    position: fixed;
+    border-radius: 0;
+    height: 100%;
+    z-index: 2;
+    background-color: #37393D;
+}
