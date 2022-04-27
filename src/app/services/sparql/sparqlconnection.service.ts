@@ -242,17 +242,14 @@ export class SPARQLConnectionService {
       // 'Content-type': 'application/json',
       'Content-Type': 'application/sparql-results+json',
       'Accept': 'application/sparql-results+json'
-    });
+  });
     if (activeEndpoint.defaultGraphURI) {
       params.append('default-graph-uri', activeEndpoint.defaultGraphURI);
     }
     params.append('query', query);
     params.append('format', 'json');
     let url = this.getUrl(activeEndpoint);
-
-    if(activeEndpoint.useProxy) {
-      return this.httpClient.get<any>(url, { headers: headers, params: this.getParams(activeEndpoint, query), responseType: 'json' });
-    } else if (activeEndpoint.method === 'GET') {
+    if (activeEndpoint.method === 'GET') {
       return this.httpClient.get<any>(url, { headers: headers, params: this.getParams(activeEndpoint, query) }).pipe(timeout(timeInterval), catchError(err => of(err.status)));
     }
     else {
@@ -272,12 +269,12 @@ export class SPARQLConnectionService {
       appendant = "/sparql?"
     }
     url = endpoint.endpointURI + appendant;
-    if (endpoint.useProxy) {
-      let proxy = this.configService.getConfigData().proxy
-      if (proxy && proxy.url) {
-        url = this.configService.getConfigData().proxy.url;
-      }
-    }
+    // if (endpoint.useProxy) {
+    //   let proxy = this.configService.getConfigData().proxy
+    //   if (proxy && proxy.url) {
+    //     url = this.configService.getConfigData().proxy.url;
+    //   }
+    // }
     // console.log('URL: ' + url);
     return url;
   }
@@ -443,10 +440,11 @@ export class SPARQLConnectionService {
     if (activeEndpoint.defaultGraphURI) {
       params = params.append('default-graph-uri', activeEndpoint.defaultGraphURI);
     }
-    if (activeEndpoint.useProxy) {
-      params = params.append('endpoint', encodeURI(activeEndpoint.endpointURI));
-      params = params.append('method', activeEndpoint.method);
-    } 
+    // if (activeEndpoint.useProxy) {
+    //   params = params.append('endpoint', btoa(activeEndpoint.endpointURI));
+    //   params = params.append('query', btoa(query));
+    //   params = params.append('method', activeEndpoint.method);
+    // } else
       params = params.append('query', query);
     
     params = params.append('format', 'json');

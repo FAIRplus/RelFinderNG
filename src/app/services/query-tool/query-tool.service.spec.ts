@@ -28,7 +28,7 @@ describe('QueryToolService', () => {
     expect(service).toBeTruthy();
   });
 
-  xit('invoke DBpedia with sample query', () => {
+  it('invoke DBpedia with sample query', () => {
     let query = 'select distinct ?Concept where {[] a ?Concept} LIMIT 10';
     let endPoint = getDBpediaEndpoint();
     let response = queryService.executeQuery(query, endPoint).subscribe(res => {
@@ -49,7 +49,7 @@ describe('QueryToolService', () => {
       "dontAppendSparql": false,
       "defaultGraphURI": testConfigData.defaultGraphURI,
       "isVirtuoso": true,
-      "useProxy": false,
+      "useProxy": true,
       "method": "POST",
       "autocompleteURIs": testConfigData.autocompleteURIs,
       "autocompleteLanguage": "en",
@@ -58,7 +58,7 @@ describe('QueryToolService', () => {
       "imageURIs": testConfigData.imageURIs,
       "linkURIs": testConfigData.linkURIs,
       "maxRelationLength": 2,
-      "queryType": "CMP"
+      "queryType": 'VIR'
     };
   }
 

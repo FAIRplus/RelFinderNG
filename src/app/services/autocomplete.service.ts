@@ -283,8 +283,8 @@ export class AutoCompleteService {
             params = params.append('default-graph-uri', activeEndpoint.defaultGraphURI);
         }
         if (activeEndpoint.useProxy) {
-            params = params.append('endpoint', encodeURI(activeEndpoint.endpointURI));
-            params = params.append('query', query);
+            params = params.append('endpoint', btoa(activeEndpoint.endpointURI));
+            params = params.append('query', btoa(query));
             params = params.append('method', activeEndpoint.method);
         } else {
             params = params.append('query', query);

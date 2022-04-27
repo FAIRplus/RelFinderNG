@@ -12,7 +12,7 @@ import { ClearConfirmationDialogService } from 'src/app/services/dialogs/clear-c
 })
 export class ProxyDialogComponent implements OnInit {
   form: FormGroup = new FormGroup({});
-  reg = /^((http|https?):\/\/)?([w|W]{3}\.)?[a-zA-Z0-9\-\.]{3,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/;
+  reg = /^((http|https?):\/\/)?([w|W]{3}\.)+[a-zA-Z0-9\-\.]{3,}\.[a-zA-Z]{2,}(\.[a-zA-Z]{2,})?$/;
 
   constructor(public dialogRef: MatDialogRef<ProxyDialogComponent>, public fb: FormBuilder, public configService: ConfigurationsService, public dialogService: ClearConfirmationDialogService) {
 
@@ -22,7 +22,7 @@ export class ProxyDialogComponent implements OnInit {
     this.setDialogSize();
     let url = this.getProxyUrlFormConfig();
     this.form = this.fb.group({
-      url: [url, [Validators.required, Validators.minLength(10)]]
+      url: [url, [Validators.required, Validators.pattern(this.reg)]]
     })
   }
 
@@ -55,7 +55,6 @@ export class ProxyDialogComponent implements OnInit {
       data.proxy.url = url;
       this.configService.setUriConfigData(data);
       this.dialogService.openSnackBar('URL Updated ', 'Successfully', 'Close', '');
-      this.closeDialog();
     }
   }
 
