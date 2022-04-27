@@ -21,7 +21,7 @@ services:
       image: novartis/relfinderng:2.0
       container_name: relfinderng
       ports:
-        - '4200:5000'
+        - '4200:80'
       expose:
         - 4200
 

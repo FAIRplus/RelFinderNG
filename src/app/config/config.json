@@ -1,6 +1,6 @@
 {
    "proxy": {
-      "url": "http://localhost:8080/proxyserver/"
+      "url": "http://relfinderproxy:8080/proxyserver/"
    },
    "endpoints": [
       {
@@ -623,7 +623,7 @@
          "name": "Local Metastore3",
          "id": "MetaStore3",
          "description": "Linked Data MetaStore3.",
-         "endpointURI": "https://allegrograph-app.prd.nibr.novartis.net/repositories/Metastore3",
+         "endpointURI": "https://allegrograph-app.prd.nibr.novartis.net/#/repositories/Metastore3",
          "dontAppendSparql": true,
          "isVirtuoso": false,
          "useProxy": true,
